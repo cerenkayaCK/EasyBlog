@@ -1,19 +1,20 @@
-﻿@model List<Post>
+﻿@model List<Post>  // Declares the model type as a list of Post objects
+
 @{
     ViewData["Title"] = "Home Page";
 }
-@foreach(var item in Model)
+@if( TempData["CategoryExist"] != null){
+    <h2>Posts in @TempData["CategoryExist"] Category</h2>
+}
+@foreach (var item in Model) 
 {
     <div class="card mb-4">
-    <a href="#!"><img class="card-img-top" src="~/img/posts/@item.Image" alt="..." /></a>
-    <div class="card-body">
-      
-        <h2 class="card-title">@item.Title</h2>
-        <p class="card-text">@item.Content</p>
-        <a class="btn btn-primary" href="#!">Read more →</a>
+ 
+        <a href="#!"><img class="card-img-top" src="~/img/posts/@item.Image" alt="..." /></a>  
+        <div class="card-body">
+            <h2 class="card-title"> @item.Title </h2>  
+            <p class="card-text"> @item.Description </p>  
+            <a class="btn btn-primary" asp-controller="Home" asp-route-id="@item.Id" asp-action="Show">Read more →</a>  
+        </div>
     </div>
-</div>
 }
-<!-- Featured blog post-->
-
-<!-- Nested row for non-featured blog posts-->
